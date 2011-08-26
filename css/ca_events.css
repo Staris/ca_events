@@ -1,0 +1,9 @@
+/* CA Events CSS */
+  /* Template One */
+  #ca_events-template-one .views-field-nothing {clear: both; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #D2D2D2;}
+  #ca_events-template-one .views-row-last .views-field-nothing {border: none;}
+  .ca_events-template-one .views-field-nothing {clear: both; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #D2D2D2;}
+  .ca_events-template-one .views-row-last .views-field-nothing {border: none;}
+	
+	#ca_events-template-one .pane-node-author {float: left; margin-right: 5px}
+	#ca_events-template-one .pane-node-created {clear: right;}

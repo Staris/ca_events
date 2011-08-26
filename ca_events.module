@@ -1,0 +1,143 @@
+<?php
+
+include_once('ca_events.features.inc');
+
+function ca_event_action_info() {
+  return array(
+    'ca_event_add_event_admin_action' => array(
+      'type' => 'user',
+      'description' => t('Add event administrator role'),
+    ),
+    'ca_event_remove_event_admin_action' => array(
+      'type' => 'user',
+      'description' => t('Remove event administrator role'),
+    ),
+    'ca_event_add_event_creator_action' => array(
+      'type' => 'user',
+      'description' => t('Add event creator role'),
+    ),
+    'ca_event_remove_event_creator_action' => array(
+      'type' => 'user',
+      'description' => t('Remove event creator role'),
+    ),
+  );
+}
+
+function ca_event_add_event_admin_action($user, $context) {
+  $available_roles = user_roles(TRUE);
+  $roles = $user->roles;
+  foreach ($available_roles as $key => $role) {
+    if ($role == 'event administrator') {
+      $add_roles[$key] = $role;
+    }
+  }
+  $roles += $add_roles;
+  user_save($user, array('roles' => $roles));
+}
+
+function ca_event_add_event_admin_action_form() {
+  $form = array();
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Promote to Event Administrator',
+  );
+  return $form;
+}
+
+function ca_event_add_event_admin_action_submit(&$form, &$form_state) {
+  
+}
+
+function ca_event_remove_event_admin_action($user, $context) {
+  $available_roles = user_roles(TRUE);
+  $roles = $user->roles;
+  foreach ($available_roles as $key => $role) {
+    if ($role == 'event administrator') {
+      $remove_roles[$key] = $role;
+    }
+  }
+  $roles = array_diff($roles, $remove_roles);
+  user_save($user, array('roles' => $roles));
+}
+
+function ca_event_remove_event_admin_action_form() {
+  $form = array();
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Demote from Event Administrator',
+  );
+  return $form;
+}
+
+function ca_event_remove_event_admin_action_submit(&$form, &$form_state) {
+  
+}
+
+function ca_event_add_event_creator_action($user, $context) {
+  $available_roles = user_roles(TRUE);
+  $roles = $user->roles;
+  foreach ($available_roles as $key => $role) {
+    if ($role == 'event creator') {
+      $add_roles[$key] = $role;
+    }
+  }
+  $roles += $add_roles;
+  user_save($user, array('roles' => $roles));
+}
+
+function ca_event_add_event_creator_action_form() {
+  $form = array();
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Promote to Event Creator',
+  );
+  return $form;
+}
+
+function ca_event_add_event_creator_action_submit(&$form, &$form_state) {
+  
+}
+
+function ca_event_remove_event_creator_action($user, $context) {
+  $available_roles = user_roles(TRUE);
+  $roles = $user->roles;
+  foreach ($available_roles as $key => $role) {
+    if ($role == 'event creator') {
+      $remove_roles[$key] = $role;
+    }
+  }
+  $roles = array_diff($roles, $remove_roles);
+  user_save($user, array('roles' => $roles));
+}
+
+function ca_event_remove_event_creator_action_form() {
+  $form = array();
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Demote from Event Creator',
+  );
+  return $form;
+}
+
+function ca_event_remove_event_creator_action_submit(&$form, &$form_state) {
+  
+}
+
+/**
+ * Implementation of hook_ctools_render_alter($info, $page, $args, $contexts, $task, $subtask).
+ */
+function ca_events_ctools_render_alter($info, $page, $args, $contexts, $task, $subtask){
+  if ($subtask['name'] == 'ca_events' || $subtask['name'] == 'home' || $task['name'] == 'node_view' || $task['name'] == 'term_view') {
+    drupal_add_css(drupal_get_path('module', 'ca_events') . "/css/ca_events.css", 'module', 'all', FALSE);
+  }
+}
+
+/**
+ * Implementation of hook_views_pre_render().
+ */
+function ca_events_views_pre_render(&$view) {
+  if ($view->name == 'blog') {
+    drupal_add_css(drupal_get_path('module', 'ca_events') . "/css/ca_events.css", 'module', 'all', FALSE);
+  }
+}
+
