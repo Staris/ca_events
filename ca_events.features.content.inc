@@ -11,16 +11,17 @@ function ca_events_content_default_fields() {
     'field_name' => 'field_ca_event_date',
     'type_name' => 'ca_event',
     'display_settings' => array(
+      'weight' => '-4',
+      'parent' => '',
       'label' => array(
-        'format' => 'above',
-        'exclude' => 0,
+        'format' => 'hidden',
       ),
       'teaser' => array(
-        'format' => 'default',
+        'format' => 'medium',
         'exclude' => 0,
       ),
       'full' => array(
-        'format' => 'default',
+        'format' => 'long',
         'exclude' => 0,
       ),
       '4' => array(
